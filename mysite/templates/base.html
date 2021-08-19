@@ -3,7 +3,9 @@
 <html>
     <head>
         <meta charset='utf-8'>
-        <title>{% block title %}{% endblock %}</title>
+        <title>{% block title %}
+
+        {% endblock %}</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <!-- Optional theme -->
@@ -18,17 +20,29 @@
                     <div class='navbar-brand' align=center>
                         {% load static %}
                         <img src="{% static "images/logo.png" %}" width=60>
+                            {% if hour > 18 %}
+                                晚安
+                            {% elif hour < 18 %}
+                                你好
+                            {% elif hour < 10 %}
+                                早安
+                            {% endif %}
                             {% block tvname %}{% endblock %}
                     </div>
                 </div>
-                {% block menu %}{% endblock %}
+                {% block menu %}
+
+                {% endblock %}
             </div>
         </nav>
-        {% block content %}{% endblock %}
+        {% block content %}
+
+        {% endblock %}
         <div class='panel panel-default'>
             <div class='panel-footer'>
                 <em>{{ now }}</em>
             </div>
+            {% include "footer.html" %}
         </div>
         <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     </body>

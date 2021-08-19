@@ -1,0 +1,40 @@
+<!-- carlist.html (p06 Template project) -->
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %} 歡迎光臨模型車 {% endblock %}
+{% block tvname %} 模型車商場 {% endblock %}
+{% block menu %}
+    <ul class='nav navbar-nav'>
+        <li class='active'><a href='/'>Home</a></li>
+        {% for car in car_maker %}
+            <li><a href='{% url 'carprice-url' forloop.counter0 %}'>{{ car }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+{% block content %}
+    <div class='conatiner'>
+        <div align="center">
+            {% for m in car_maker %}
+                <td bgcolor="#ccffcc"></td><a href="{% url 'carprice-url' forloop.counter0 %}"> {{m}} </a></td>
+            {% endfor %}
+            {% if cars %}
+                <table>
+                <tr>
+                    <td>車廠</td><td>車款</td><td>價格</td><td>庫存</td>
+                </tr>
+            {% endif %}
+            {% for c in cars|dictsort:"qty" %}
+                <tr bgcolor="{% cycle '#eeeeee' '#ddcccc' '#ee4321'%}">
+                    <td>{{maker_name}}</td><td>{{ c.model }}</td><td>NT.{{ c.price | floatformat:2 | intcomma}}</td>
+                    <td>{{ c.qty }}</td>
+                </tr>
+                {% empty %}
+                <h3>車廠<em>{{maker_name}}</em>目前無庫存車</h3>
+            {% endfor %}
+        </div>
+        {% if cars %}
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
