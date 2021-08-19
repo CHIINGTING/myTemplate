@@ -20,5 +20,6 @@ from mysite import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('<int:tvno>/', views.yt, name='tv-url')
+#    path('<int:tvno>/', views.yt, name='tv-url')
+    path('<int:tvno>/', index.yt, name='tv-url')
 ]
